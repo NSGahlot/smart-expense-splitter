@@ -15,11 +15,7 @@ const GroupPage = () => {
   );
 
   const handleReset = () => {
-    const confirmReset = window.confirm(
-      "This will delete all groups and expenses. Continue?"
-    );
-
-    if (confirmReset) {
+    if (window.confirm("This will delete all groups and expenses. Continue?")) {
       dispatch(resetAll());
       localStorage.clear();
       navigate("/");
@@ -30,14 +26,18 @@ const GroupPage = () => {
 
   return (
     <div>
+      {/* 🔥 NEW NAVIGATION BAR */}
+      <div style={{ marginBottom: "20px" }}>
+        <button onClick={() => navigate("/")}>⬅️ Back to Home</button>
+        <button onClick={handleReset} style={{ marginLeft: "10px" }}>
+          Reset All Data
+        </button>
+      </div>
+
       <h1>{group.name}</h1>
 
-      <button onClick={handleReset} style={{ marginBottom: "20px" }}>
-        Reset All Data
-      </button>
-
       <ExpenseForm group={group} />
-      <ExpenseList expenses={group.expenses} groupId={groupId} />
+      <ExpenseList expenses={group.expenses} groupId={group.id} />
       <BalanceSummary group={group} />
     </div>
   );

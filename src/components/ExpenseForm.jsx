@@ -6,7 +6,16 @@ const ExpenseForm = ({ group }) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [paidBy, setPaidBy] = useState(group.members[0]);
+  const [splitType, setSplitType] = useState("equal");
+  const [customSplit, setCustomSplit] = useState({});
   const dispatch = useDispatch();
+
+  const handleCustomChange = (member, value) => {
+    setCustomSplit({
+      ...customSplit,
+      [member]: Number(value),
+    });
+  };
 
   const handleAddExpense = () => {
     if (!title || !amount) return;
@@ -18,12 +27,16 @@ const ExpenseForm = ({ group }) => {
           title,
           amount: Number(amount),
           paidBy,
+          splitType,
+          customSplit: splitType === "custom" ? customSplit : null,
         },
       })
     );
 
     setTitle("");
     setAmount("");
+    setSplitType("equal");
+    setCustomSplit({});
   };
 
   return (
@@ -50,6 +63,44 @@ const ExpenseForm = ({ group }) => {
           </option>
         ))}
       </select>
+
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="equal"
+            checked={splitType === "equal"}
+            onChange={() => setSplitType("equal")}
+          />
+          Equal Split
+        </label>
+
+        <label style={{ marginLeft: "10px" }}>
+          <input
+            type="radio"
+            value="custom"
+            checked={splitType === "custom"}
+            onChange={() => setSplitType("custom")}
+          />
+          Custom Split
+        </label>
+      </div>
+
+      {splitType === "custom" && (
+        <div>
+          <h4>Custom Split</h4>
+          {group.members.map((m) => (
+            <div key={m}>
+              <label>{m}: </label>
+              <input
+                type="number"
+                placeholder="Amount"
+                onChange={(e) => handleCustomChange(m, e.target.value)}
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
       <button onClick={handleAddExpense}>Add</button>
     </div>
