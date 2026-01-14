@@ -30,11 +30,10 @@ const groupsSlice = createSlice({
       state.activeGroupId = action.payload;
     },
 
-    // 🔥 NEW REDUCER
     addExpense(state, action) {
       const { groupId, expense } = action.payload;
-
       const group = state.groups.find((g) => g.id === groupId);
+
       if (group) {
         group.expenses.push({
           id: nanoid(),
@@ -42,9 +41,16 @@ const groupsSlice = createSlice({
         });
       }
     },
+
+    // 🔥 RESET ALL DATA
+    resetAll(state) {
+      state.groups = [];
+      state.activeGroupId = null;
+    },
   },
 });
 
-export const { createGroup, setActiveGroup, addExpense } = groupsSlice.actions;
+export const { createGroup, setActiveGroup, addExpense, resetAll } =
+  groupsSlice.actions;
 
 export default groupsSlice.reducer;
