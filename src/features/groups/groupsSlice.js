@@ -25,11 +25,26 @@ const groupsSlice = createSlice({
         };
       },
     },
+
     setActiveGroup(state, action) {
       state.activeGroupId = action.payload;
+    },
+
+    // 🔥 NEW REDUCER
+    addExpense(state, action) {
+      const { groupId, expense } = action.payload;
+
+      const group = state.groups.find((g) => g.id === groupId);
+      if (group) {
+        group.expenses.push({
+          id: nanoid(),
+          ...expense,
+        });
+      }
     },
   },
 });
 
-export const { createGroup, setActiveGroup } = groupsSlice.actions;
+export const { createGroup, setActiveGroup, addExpense } = groupsSlice.actions;
+
 export default groupsSlice.reducer;
