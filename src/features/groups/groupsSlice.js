@@ -9,6 +9,7 @@ const groupsSlice = createSlice({
   name: "groups",
   initialState,
   reducers: {
+    // Create new group
     createGroup: {
       reducer(state, action) {
         state.groups.push(action.payload);
@@ -26,10 +27,12 @@ const groupsSlice = createSlice({
       },
     },
 
+    // Set active group
     setActiveGroup(state, action) {
       state.activeGroupId = action.payload;
     },
 
+    // Add expense
     addExpense(state, action) {
       const { groupId, expense } = action.payload;
       const group = state.groups.find((g) => g.id === groupId);
@@ -42,7 +45,17 @@ const groupsSlice = createSlice({
       }
     },
 
-    // 🔥 RESET ALL DATA
+    // Delete expense
+    deleteExpense(state, action) {
+      const { groupId, expenseId } = action.payload;
+      const group = state.groups.find((g) => g.id === groupId);
+
+      if (group) {
+        group.expenses = group.expenses.filter((e) => e.id !== expenseId);
+      }
+    },
+
+    // Reset all data
     resetAll(state) {
       state.groups = [];
       state.activeGroupId = null;
@@ -50,7 +63,12 @@ const groupsSlice = createSlice({
   },
 });
 
-export const { createGroup, setActiveGroup, addExpense, resetAll } =
-  groupsSlice.actions;
+export const {
+  createGroup,
+  setActiveGroup,
+  addExpense,
+  deleteExpense,
+  resetAll,
+} = groupsSlice.actions;
 
 export default groupsSlice.reducer;

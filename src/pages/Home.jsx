@@ -1,30 +1,33 @@
-import { useDispatch } from "react-redux";
-import { resetAll } from "../features/groups/groupsSlice";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import GroupForm from "../components/GroupForm";
 
 const Home = () => {
-  const dispatch = useDispatch();
-
-  const handleReset = () => {
-    const confirmReset = window.confirm(
-      "Are you sure? All groups and expenses will be deleted."
-    );
-
-    if (confirmReset) {
-      dispatch(resetAll());
-      localStorage.clear();
-    }
-  };
+  const groups = useSelector((state) => state.groups.groups);
+  const navigate = useNavigate();
 
   return (
     <div>
       <h1>Smart Expense Splitter</h1>
 
-      <GroupForm />
+      {groups.length > 0 && (
+        <>
+          <h2>Your Groups</h2>
+          <ul>
+            {groups.map((g) => (
+              <li key={g.id}>
+                <button onClick={() => navigate(`/group/${g.id}`)}>
+                  {g.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
 
-      <button onClick={handleReset} style={{ marginTop: "20px" }}>
-        Reset All Data
-      </button>
+      <hr />
+
+      <GroupForm />
     </div>
   );
 };

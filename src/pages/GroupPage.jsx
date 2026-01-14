@@ -37,7 +37,7 @@ const GroupPage = () => {
       </button>
 
       <ExpenseForm group={group} />
-      <ExpenseList expenses={group.expenses} />
+      <ExpenseList expenses={group.expenses} groupId={groupId} />
       <BalanceSummary group={group} />
     </div>
   );
