@@ -1,0 +1,77 @@
+.group-container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 16px;
+    background: #f8fafc;
+}
+
+/* TOP BAR */
+.group-topbar {
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 16px;
+}
+
+.group-topbar button {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background: white;
+    cursor: pointer;
+}
+
+.group-topbar button:hover {
+    background: #eef2ff;
+}
+
+.danger-btn {
+    background: #fee2e2;
+    border-color: #fecaca;
+}
+
+/* TITLE */
+.group-title {
+    font-size: 22px;
+    margin: 14px 0;
+}
+
+/* CARD */
+.section-card {
+    background: white;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .group-container {
+        padding: 12px;
+    }
+
+    .group-topbar {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .group-topbar button {
+        flex: 1;
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .group-title {
+        font-size: 20px;
+        margin: 12px 0;
+    }
+
+    .section-card {
+        padding: 12px;
+    }
+}

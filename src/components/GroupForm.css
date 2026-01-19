@@ -1,0 +1,33 @@
+.group-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e3e7ee;
+}
+
+.group-form h2 {
+    margin-bottom: 15px;
+}
+
+.group-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.create-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #4f7cff;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.create-btn:hover {
+    background: #3f6ae0;
+}

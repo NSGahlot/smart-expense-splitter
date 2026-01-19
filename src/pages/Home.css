@@ -1,0 +1,106 @@
+.home-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.home-title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* ===== STATS ===== */
+.stats-wrapper {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    flex: 1;
+    background: #f7f9fc;
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #e3e7ee;
+}
+
+.stat-card h3 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.stat-card p {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* ===== SEARCH ===== */
+.search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* ===== GROUP LIST ===== */
+.group-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.group-item {}
+
+.group-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    text-align: left;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+.group-btn:hover {
+    background: #f1f5ff;
+    border-color: #b4c6ff;
+    transform: translateY(-2px);
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+    background: #fafafa;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* ===== ACTIONS ===== */
+.reset-btn {
+    margin-top: 24px;
+    background: #ffe5e5;
+    border: 1px solid #ffbcbc;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    background: #ffd6d6;
+}
+
+.divider {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}

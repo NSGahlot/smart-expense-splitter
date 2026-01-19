@@ -1,0 +1,12 @@
+.balance-summary h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.balance-item {
+    background: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-bottom: 6px;
+}

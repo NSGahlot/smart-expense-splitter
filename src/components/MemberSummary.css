@@ -1,0 +1,41 @@
+.member-summary h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.member-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.member-table th,
+.member-table td {
+    padding: 8px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.member-table th {
+    background: #f8fafc;
+}
+
+.net-positive {
+    color: #16a34a;
+    font-weight: 500;
+}
+
+.net-negative {
+    color: #dc2626;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .member-summary {
+        overflow-x: auto;
+    }
+
+    .member-table {
+        min-width: 500px;
+    }
+}

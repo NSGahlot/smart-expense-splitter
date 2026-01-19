@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { createGroup } from "../features/groups/groupsSlice";
 import { useNavigate } from "react-router-dom";
 import MemberForm from "./MemberForm";
+import "./GroupForm.css";
 
 const GroupForm = () => {
   const [groupName, setGroupName] = useState("");
@@ -27,10 +28,11 @@ const GroupForm = () => {
   };
 
   return (
-    <div>
+    <div className="group-form">
       <h2>Create Group</h2>
 
       <input
+        className="group-input"
         type="text"
         placeholder="Group Name"
         value={groupName}
@@ -39,7 +41,9 @@ const GroupForm = () => {
 
       <MemberForm members={members} setMembers={setMembers} />
 
-      <button onClick={handleCreateGroup}>Create Group</button>
+      <button className="create-btn" onClick={handleCreateGroup}>
+        Create Group
+      </button>
     </div>
   );
 };

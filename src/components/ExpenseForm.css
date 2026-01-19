@@ -1,0 +1,72 @@
+.expense-form h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* ROW FOR INPUTS */
+.expense-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.expense-form input,
+.expense-form select {
+    padding: 8px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+}
+
+/* SPLIT OPTIONS */
+.split-options {
+    display: flex;
+    gap: 16px;
+    margin: 8px 0 12px;
+    font-size: 13px;
+}
+
+/* CUSTOM SPLIT */
+.custom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+/* CTA */
+.add-expense-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    background: #4f7cff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add-expense-btn:hover {
+    background: #3f6ae0;
+}
+
+@media (max-width: 768px) {
+    .expense-row {
+        grid-template-columns: 1fr;
+    }
+
+    .split-options {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .custom-row {
+        grid-template-columns: 1fr;
+    }
+
+    .add-expense-btn {
+        font-size: 13px;
+        padding: 9px;
+    }
+}

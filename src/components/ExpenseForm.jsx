@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../features/groups/groupsSlice";
+import "./ExpenseForm.css";
 
 const ExpenseForm = ({ group }) => {
   const [title, setTitle] = useState("");
@@ -11,10 +12,7 @@ const ExpenseForm = ({ group }) => {
   const dispatch = useDispatch();
 
   const handleCustomChange = (member, value) => {
-    setCustomSplit({
-      ...customSplit,
-      [member]: Number(value),
-    });
+    setCustomSplit({ ...customSplit, [member]: Number(value) });
   };
 
   const handleAddExpense = () => {
@@ -40,69 +38,65 @@ const ExpenseForm = ({ group }) => {
   };
 
   return (
-    <div>
+    <div className="expense-form">
       <h3>Add Expense</h3>
 
-      <input
-        placeholder="Expense title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <div className="expense-row">
+        <input
+          placeholder="Expense title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-      <input
-        type="number"
-        placeholder="Amount"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
+        <input
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
 
-      <select value={paidBy} onChange={(e) => setPaidBy(e.target.value)}>
-        {group.members.map((m) => (
-          <option key={m} value={m}>
-            {m}
-          </option>
-        ))}
-      </select>
+        <select value={paidBy} onChange={(e) => setPaidBy(e.target.value)}>
+          {group.members.map((m) => (
+            <option key={m}>{m}</option>
+          ))}
+        </select>
+      </div>
 
-      <div>
+      <div className="split-options">
         <label>
           <input
             type="radio"
-            value="equal"
             checked={splitType === "equal"}
             onChange={() => setSplitType("equal")}
-          />
+          />{" "}
           Equal Split
         </label>
 
-        <label style={{ marginLeft: "10px" }}>
+        <label>
           <input
             type="radio"
-            value="custom"
             checked={splitType === "custom"}
             onChange={() => setSplitType("custom")}
-          />
+          />{" "}
           Custom Split
         </label>
       </div>
 
-      {splitType === "custom" && (
-        <div>
-          <h4>Custom Split</h4>
-          {group.members.map((m) => (
-            <div key={m}>
-              <label>{m}: </label>
-              <input
-                type="number"
-                placeholder="Amount"
-                onChange={(e) => handleCustomChange(m, e.target.value)}
-              />
-            </div>
-          ))}
-        </div>
-      )}
+      {splitType === "custom" &&
+        group.members.map((m) => (
+          <div key={m} className="custom-row">
+            <span>{m}</span>
+            <input
+              type="number"
+              placeholder="Amount"
+              onChange={(e) => handleCustomChange(m, e.target.value)}
+            />
+          </div>
+        ))}
 
-      <button onClick={handleAddExpense}>Add</button>
+      <button className="add-expense-btn" onClick={handleAddExpense}>
+        Add Expense
+      </button>
     </div>
   );
 };
