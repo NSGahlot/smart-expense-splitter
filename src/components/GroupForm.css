@@ -1,33 +1,68 @@
+/* 🧩 GROUP FORM */
 .group-form {
     background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
+    padding: 28px;
+    border-radius: 14px;
     border: 1px solid #e3e7ee;
+    max-width: 520px;
+    margin: 40px auto;
 }
 
+/* ✅ IMPORTANT: consistent box sizing */
+.group-form *,
+.group-form *::before,
+.group-form *::after {
+    box-sizing: border-box;
+}
+
+/* 📝 TITLE */
 .group-form h2 {
-    margin-bottom: 15px;
+    margin-bottom: 24px;
+    font-size: 20px;
+    text-align: center;
 }
 
+/* ✏️ GROUP NAME INPUT */
 .group-input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 14px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
 }
 
+/* 🚀 CREATE GROUP BUTTON */
 .create-btn {
-    width: 100%;
+    display: block;
+    width: 70%;
+    margin: 24px auto 0;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: none;
     background: #4f7cff;
-    color: white;
-    font-size: 15px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
+    transition: background 0.2s ease;
 }
 
 .create-btn:hover {
     background: #3f6ae0;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 640px) {
+    .group-form {
+        padding: 20px;
+    }
+
+    .group-form h2 {
+        font-size: 18px;
+    }
+
+    .create-btn {
+        width: 100%;
+    }
 }

@@ -1,22 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../features/groups/groupsSlice";
 import "./ExpenseForm.css";
 
 const ExpenseForm = ({ group }) => {
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [paidBy, setPaidBy] = useState(group.members[0]);
-  const [splitType, setSplitType] = useState("equal");
-  const [customSplit, setCustomSplit] = useState({});
   const dispatch = useDispatch();
 
+  if (!group) return null;
+
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [paidBy, setPaidBy] = useState("");
+  const [splitType, setSplitType] = useState("equal");
+  const [customSplit, setCustomSplit] = useState({});
+  const [expenseDate, setExpenseDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+
+  useEffect(() => {
+    if (group?.members?.length) {
+      setPaidBy(group.members[0]);
+    }
+  }, [group]);
+
   const handleCustomChange = (member, value) => {
-    setCustomSplit({ ...customSplit, [member]: Number(value) });
+    setCustomSplit((prev) => ({
+      ...prev,
+      [member]: Number(value),
+    }));
   };
 
   const handleAddExpense = () => {
-    if (!title || !amount) return;
+    if (!title || !amount || !paidBy) return;
 
     dispatch(
       addExpense({
@@ -27,6 +42,7 @@ const ExpenseForm = ({ group }) => {
           paidBy,
           splitType,
           customSplit: splitType === "custom" ? customSplit : null,
+          date: new Date(expenseDate).toISOString(), // ✅ USER SELECTED DATE
         },
       })
     );
@@ -35,6 +51,7 @@ const ExpenseForm = ({ group }) => {
     setAmount("");
     setSplitType("equal");
     setCustomSplit({});
+    setExpenseDate(new Date().toISOString().split("T")[0]);
   };
 
   return (
@@ -57,10 +74,19 @@ const ExpenseForm = ({ group }) => {
 
         <select value={paidBy} onChange={(e) => setPaidBy(e.target.value)}>
           {group.members.map((m) => (
-            <option key={m}>{m}</option>
+            <option key={m} value={m}>
+              {m}
+            </option>
           ))}
         </select>
       </div>
+
+      {/* ✅ DATE PICKER */}
+      <input
+        type="date"
+        value={expenseDate}
+        onChange={(e) => setExpenseDate(e.target.value)}
+      />
 
       <div className="split-options">
         <label>

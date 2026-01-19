@@ -5,7 +5,9 @@ import "./ExpenseList.css";
 const ExpenseList = ({ expenses, groupId }) => {
   const dispatch = useDispatch();
 
-  if (expenses.length === 0) return <p>No expenses yet</p>;
+  if (expenses.length === 0) {
+    return <p>No expenses yet</p>;
+  }
 
   return (
     <div className="expense-list">
@@ -14,7 +16,14 @@ const ExpenseList = ({ expenses, groupId }) => {
       {expenses.map((e) => (
         <div key={e.id} className="expense-item">
           <div className="expense-info">
-            {e.title} – ₹{e.amount} (Paid by {e.paidBy})
+            <div>
+              {e.title} – ₹{e.amount} (Paid by {e.paidBy})
+            </div>
+
+            <small style={{ color: "#666" }}>
+              📅{" "}
+              {e.date ? new Date(e.date).toDateString() : "Date not available"}
+            </small>
           </div>
 
           <button

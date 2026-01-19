@@ -1,25 +1,66 @@
+/* 👥 MEMBER FORM */
 .member-form {
-    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px;
 }
 
+/* ✅ IMPORTANT: consistent box sizing */
+.member-form *,
+.member-form *::before,
+.member-form *::after {
+    box-sizing: border-box;
+}
+
+/* 🏷️ TITLE */
+.member-form h4 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+    margin: 0;
+}
+
+/* ✏️ MEMBER INPUT */
 .member-input {
-    width: 70%;
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
 }
 
+/* ➕ ADD BUTTON */
 .add-member-btn {
-    padding: 8px 12px;
-    margin-left: 8px;
-    border-radius: 6px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
     border: none;
-    background: #e9ecf5;
+    background: #eef2ff;
+    color: #333;
     cursor: pointer;
+    font-size: 15px;
 }
 
+/* 📋 MEMBER LIST */
 .member-list {
-    margin-top: 10px;
-    padding-left: 18px;
-    color: #555;
+    list-style: none;
+    padding: 0;
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.member-list li {
+    background: #f1f5f9;
+    padding: 8px 14px;
+    border-radius: 16px;
+    font-size: 15px;
+    color: #333;
+    font-weight: 500;
+}
+
+.member-list li:hover {
+    background: #e0e7ff;
 }
