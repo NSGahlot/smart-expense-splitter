@@ -1,0 +1,58 @@
+/* 👤 MEMBER EXPENSES CONTAINER */
+.member-expenses {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 24px;
+}
+
+/* TITLE */
+.member-expenses h3 {
+    font-size: 18px;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+/* 🧾 EACH EXPENSE */
+.member-expense-item {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.member-expense-item strong {
+    font-weight: 600;
+    color: #111;
+}
+
+.member-expense-item small {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* EMPTY STATE */
+.member-expense-empty {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+    .member-expenses {
+        padding: 16px;
+    }
+
+    .member-expenses h3 {
+        font-size: 16px;
+    }
+
+    .member-expense-item {
+        font-size: 13px;
+    }
+}

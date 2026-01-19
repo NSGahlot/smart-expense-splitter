@@ -1,27 +1,21 @@
 const MemberExpenses = ({ group, member }) => {
   const relatedExpenses = group.expenses.filter((e) => {
-    // Paid by member
     if (e.paidBy === member) return true;
-
-    // Equal split → all members involved
     if (e.splitType === "equal") return true;
-
-    // Custom split
     if (e.customSplit && e.customSplit[member] > 0) return true;
-
     return false;
   });
 
   if (relatedExpenses.length === 0) {
-    return <p>No expenses for {member}</p>;
+    return <p className="member-expense-empty">No expenses for {member}</p>;
   }
 
   return (
-    <div>
+    <div className="member-expenses">
       <h3>Expenses for {member}</h3>
 
       {relatedExpenses.map((e) => (
-        <div key={e.id} style={{ marginBottom: "10px" }}>
+        <div key={e.id} className="member-expense-item">
           <strong>{e.title}</strong> – ₹{e.amount}
           <br />
           <small>

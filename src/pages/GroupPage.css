@@ -1,27 +1,29 @@
+/* 📦 PAGE CONTAINER */
 .group-container {
-    max-width: 920px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 16px;
+    padding: 20px;
     background: #f8fafc;
 }
 
-/* TOP BAR */
+/* 🔝 TOP BAR */
 .group-topbar {
     display: flex;
-    gap: 8px;
-    padding: 10px;
-    background: white;
-    border-radius: 10px;
+    gap: 10px;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 12px;
     border: 1px solid #e5e7eb;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
 }
 
 .group-topbar button {
-    padding: 6px 12px;
+    padding: 8px 14px;
     font-size: 13px;
-    border-radius: 6px;
+    border-radius: 8px;
     border: 1px solid #d1d5db;
-    background: white;
+    background: #ffffff;
     cursor: pointer;
 }
 
@@ -34,44 +36,67 @@
     border-color: #fecaca;
 }
 
-/* TITLE */
+/* 🏷️ TITLE */
 .group-title {
-    font-size: 22px;
-    margin: 14px 0;
+    font-size: 24px;
+    margin: 18px 0;
+    text-align: center;
 }
 
-/* CARD */
+/* 🧾 SECTION CARD */
 .section-card {
-    background: white;
-    border-radius: 10px;
-    padding: 14px;
-    margin-bottom: 16px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 18px;
     border: 1px solid #e5e7eb;
 }
 
-/* ===== MOBILE RESPONSIVE ===== */
+/* 🔑 VERY IMPORTANT: box sizing fix */
+.section-card,
+.section-card * {
+    box-sizing: border-box;
+}
+
+/* 🔍 FILTER CARD */
+.filter-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 🔎 FILTER INPUTS */
+.filter-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+}
+
+/* 📱 MOBILE */
 @media (max-width: 768px) {
     .group-container {
-        padding: 12px;
+        padding: 14px;
     }
 
     .group-topbar {
-        flex-wrap: wrap;
-        gap: 6px;
+        gap: 8px;
     }
 
     .group-topbar button {
         flex: 1;
         font-size: 12px;
-        padding: 6px;
+        padding: 8px;
     }
 
     .group-title {
         font-size: 20px;
-        margin: 12px 0;
+        margin: 14px 0;
     }
 
     .section-card {
-        padding: 12px;
+        padding: 14px;
     }
 }

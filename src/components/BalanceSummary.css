@@ -1,12 +1,51 @@
-.balance-summary h3 {
-    font-size: 16px;
-    margin-bottom: 8px;
+/* 💰 BALANCE SUMMARY CONTAINER */
+.balance-summary {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 24px;
 }
 
+/* TITLE */
+.balance-summary h3 {
+    font-size: 18px;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+/* EMPTY STATE */
+.balance-empty {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* LIST */
+.balance-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 💸 EACH SETTLEMENT */
 .balance-item {
     background: #f1f5f9;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    margin-bottom: 6px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+    .balance-summary {
+        padding: 16px;
+    }
+
+    .balance-item {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
 }

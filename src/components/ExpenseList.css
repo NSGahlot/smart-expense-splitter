@@ -1,38 +1,65 @@
-.expense-list h3 {
-    font-size: 16px;
-    margin-bottom: 8px;
+/* 📋 EXPENSE LIST CONTAINER */
+.expense-list {
+    margin-top: 24px;
 }
 
+/* TITLE */
+.expense-list h3 {
+    font-size: 18px;
+    margin-bottom: 14px;
+}
+
+/* 🧾 EXPENSE CARD */
 .expense-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
-    font-size: 13px;
-    border-bottom: 1px solid #eee;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 10px;
 }
 
+/* LEFT INFO */
 .expense-info {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+    color: #111;
 }
 
+.expense-info small {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* ❌ DELETE BUTTON */
 .delete-expense-btn {
     border: none;
-    background: transparent;
+    background: #fee2e2;
+    color: #dc2626;
     cursor: pointer;
-    font-size: 16px;
-    color: #e11d48;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
 }
 
+.delete-expense-btn:hover {
+    background: #fecaca;
+}
+
+/* 📱 MOBILE */
 @media (max-width: 768px) {
     .expense-item {
         flex-direction: column;
         align-items: flex-start;
-        gap: 6px;
+        gap: 10px;
     }
 
     .delete-expense-btn {
         align-self: flex-end;
     }
 }
-

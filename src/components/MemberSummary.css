@@ -1,41 +1,71 @@
-.member-summary h3 {
-    font-size: 16px;
-    margin-bottom: 8px;
+/* 👥 MEMBER SUMMARY CONTAINER */
+.member-summary {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 24px;
 }
 
+/* TITLE */
+.member-summary h3 {
+    font-size: 18px;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+/* 📊 TABLE */
 .member-table {
     width: 100%;
     border-collapse: collapse;
 }
 
+/* HEADERS + CELLS */
 .member-table th,
 .member-table td {
-    padding: 8px;
-    font-size: 13px;
+    padding: 10px 12px;
+    font-size: 14px;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .member-table th {
     background: #f8fafc;
+    font-weight: 600;
 }
 
+/* MEMBER NAME (clickable) */
+.member-name {
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+/* NET AMOUNT COLORS */
 .net-positive {
     color: #16a34a;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .net-negative {
     color: #dc2626;
-    font-weight: 500;
+    font-weight: 600;
 }
 
+/* 📱 MOBILE */
 @media (max-width: 768px) {
     .member-summary {
+        padding: 16px;
         overflow-x: auto;
     }
 
     .member-table {
-        min-width: 500px;
+        min-width: 520px;
+    }
+
+    .member-table th,
+    .member-table td {
+        font-size: 13px;
     }
 }

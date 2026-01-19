@@ -94,20 +94,20 @@ const GroupPage = () => {
       </div>
 
       {/* 🔍 SEARCH + DATE FILTER */}
-      <div className="section-card">
+      <div className="section-card filter-card">
         <input
           type="text"
+          className="filter-input"
           placeholder="Search expenses by title / member / date"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ width: "100%", padding: "8px", marginBottom: "8px" }}
         />
 
         <input
           type="date"
+          className="filter-input"
           value={jumpDate}
           onChange={(e) => setJumpDate(e.target.value)}
-          style={{ width: "100%", padding: "8px" }}
         />
       </div>
 

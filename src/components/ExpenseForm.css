@@ -1,64 +1,129 @@
-.expense-form h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
+/* 🧾 EXPENSE FORM */
+.expense-form {
+    background: #ffffff;
+    border: 1px solid #e3e7ee;
+    border-radius: 14px;
+    padding: 24px;
+    margin: 24px auto;
+    max-width: 720px;
 }
 
-/* ROW FOR INPUTS */
+/* box sizing consistency */
+.expense-form *,
+.expense-form *::before,
+.expense-form *::after {
+    box-sizing: border-box;
+}
+
+/* TITLE */
+.expense-form h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* 🔲 MAIN ROW */
 .expense-row {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 12px;
+    margin-bottom: 14px;
 }
 
+/* INPUTS + SELECT */
 .expense-form input,
 .expense-form select {
-    padding: 8px;
-    font-size: 13px;
-    border-radius: 6px;
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 10px;
     border: 1px solid #d1d5db;
 }
 
-/* SPLIT OPTIONS */
-.split-options {
-    display: flex;
-    gap: 16px;
-    margin: 8px 0 12px;
-    font-size: 13px;
+/* DATE INPUT */
+.expense-form input[type="date"] {
+    width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        font-size: 14px;
+        cursor: pointer;
+    margin-bottom: 14px;
 }
 
-/* CUSTOM SPLIT */
+/* calendar icon (Chrome / Edge) */
+.expense-form input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+/* focus state */
+.expense-form input[type="date"]:focus {
+    outline: none;
+    border-color: #4f7cff;
+}
+
+/* 🔀 SPLIT OPTIONS */
+.split-options {
+    display: flex;
+    gap: 20px;
+    margin: 10px 0 14px;
+    font-size: 14px;
+}
+
+.split-options label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+/* CUSTOM SPLIT ROW */
 .custom-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 6px;
+    gap: 12px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.custom-row span {
+    font-size: 14px;
+    color: #333;
 }
 
 /* CTA */
 .add-expense-btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 8px;
+    display: block;
+    width: 60%;
+    margin: 20px auto 0;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 10px;
     background: #4f7cff;
     color: white;
     border: none;
     cursor: pointer;
+    transition: background 0.2s ease;
 }
 
 .add-expense-btn:hover {
     background: #3f6ae0;
 }
 
+/* 📱 MOBILE */
 @media (max-width: 768px) {
+    .expense-form {
+        padding: 18px;
+    }
+
     .expense-row {
         grid-template-columns: 1fr;
     }
 
     .split-options {
         flex-direction: column;
-        gap: 6px;
+        gap: 8px;
     }
 
     .custom-row {
@@ -66,7 +131,7 @@
     }
 
     .add-expense-btn {
-        font-size: 13px;
-        padding: 9px;
+        width: 100%;
+        font-size: 14px;
     }
 }

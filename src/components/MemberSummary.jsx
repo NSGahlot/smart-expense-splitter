@@ -23,10 +23,7 @@ const MemberSummary = ({ group, setSelectedMember }) => {
             return (
               <tr key={name}>
                 <td
-                  style={{
-                    cursor: "pointer",
-                    textDecoration: "underline",
-                  }}
+                  className="member-name"
                   onClick={() => setSelectedMember(name)}
                 >
                   {name}
