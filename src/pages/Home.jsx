@@ -110,9 +110,7 @@ const Home = () => {
                           <div className="group-item-name">{g.name}</div>
                           <div className="group-item-meta">
                             <span>📝 {g.expenses.length} expenses</span>
-                            <span>
-                              👥 {g.members.length} members
-                            </span>
+                            <span>👥 {g.members.length} members</span>
                           </div>
                         </div>
                         <div
