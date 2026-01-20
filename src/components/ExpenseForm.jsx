@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../features/groups/groupsSlice";
 import "./ExpenseForm.css";
@@ -6,22 +6,16 @@ import "./ExpenseForm.css";
 const ExpenseForm = ({ group }) => {
   const dispatch = useDispatch();
 
-  if (!group) return null;
-
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
-  const [paidBy, setPaidBy] = useState("");
+  const [paidBy, setPaidBy] = useState(group?.members?.[0] || "");
   const [splitType, setSplitType] = useState("equal");
   const [customSplit, setCustomSplit] = useState({});
   const [expenseDate, setExpenseDate] = useState(
-    new Date().toISOString().split("T")[0]
+    new Date().toISOString().split("T")[0],
   );
 
-  useEffect(() => {
-    if (group?.members?.length) {
-      setPaidBy(group.members[0]);
-    }
-  }, [group]);
+  if (!group) return null;
 
   const handleCustomChange = (member, value) => {
     setCustomSplit((prev) => ({
@@ -44,7 +38,7 @@ const ExpenseForm = ({ group }) => {
           customSplit: splitType === "custom" ? customSplit : null,
           date: new Date(expenseDate).toISOString(), // ✅ USER SELECTED DATE
         },
-      })
+      }),
     );
 
     setTitle("");

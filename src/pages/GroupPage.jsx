@@ -26,7 +26,7 @@ const GroupPage = () => {
   const [jumpDate, setJumpDate] = useState("");
 
   const group = useSelector((state) =>
-    state.groups.groups.find((g) => g.id === groupId)
+    state.groups.groups.find((g) => g.id === groupId),
   );
 
   if (!group) return <p>Group not found</p>;
@@ -46,7 +46,7 @@ const GroupPage = () => {
   const finalExpenses = jumpDate
     ? searchedExpenses.filter(
         (e) =>
-          e.date && new Date(e.date).toISOString().split("T")[0] === jumpDate
+          e.date && new Date(e.date).toISOString().split("T")[0] === jumpDate,
       )
     : searchedExpenses;
 
@@ -58,14 +58,14 @@ const GroupPage = () => {
   };
 
   const handleDelete = () => {
-    if (window.confirm("Delete this group?")) {
+    if (window.confirm("Delete this group? This cannot be undone.")) {
       dispatch(deleteGroup(group.id));
       navigate("/");
     }
   };
 
   const handleReset = () => {
-    if (window.confirm("Delete all data?")) {
+    if (window.confirm("Delete all data? This cannot be undone.")) {
       dispatch(resetAll());
       localStorage.clear();
       navigate("/");
@@ -74,70 +74,109 @@ const GroupPage = () => {
 
   return (
     <div className="group-container">
-      {/* 🔝 TOP BAR */}
-      <div className="group-topbar">
-        <button onClick={() => navigate("/")}>⬅ Home</button>
-        <button onClick={handleRename}>✏ Rename</button>
-        <button className="danger-btn" onClick={handleDelete}>
-          Delete Group
-        </button>
-        <button className="danger-btn" onClick={handleReset}>
-          Reset All
-        </button>
-      </div>
+      {/* 🎨 GROUP HEADER */}
+      <div className="group-header">
+        <h1 className="group-title">{group.name}</h1>
 
-      <h1 className="group-title">{group.name}</h1>
-
-      {/* ➕ ADD EXPENSE */}
-      <div className="section-card">
-        <ExpenseForm group={group} />
-      </div>
-
-      {/* 🔍 SEARCH + DATE FILTER */}
-      <div className="section-card filter-card">
-        <input
-          type="text"
-          className="filter-input"
-          placeholder="Search expenses by title / member / date"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-
-        <input
-          type="date"
-          className="filter-input"
-          value={jumpDate}
-          onChange={(e) => setJumpDate(e.target.value)}
-        />
-      </div>
-
-      {/* 📋 EXPENSE LIST */}
-      <div className="section-card">
-        <ExpenseList expenses={finalExpenses} groupId={group.id} />
-      </div>
-
-      {/* ⚖ BALANCE */}
-      <div className="section-card">
-        <BalanceSummary group={{ ...group, expenses: finalExpenses }} />
-      </div>
-
-      {/* 👥 MEMBER SUMMARY */}
-      <div className="section-card">
-        <MemberSummary
-          group={{ ...group, expenses: finalExpenses }}
-          setSelectedMember={setSelectedMember}
-        />
-      </div>
-
-      {/* 👤 MEMBER EXPENSES */}
-      {selectedMember && (
-        <div className="section-card">
-          <MemberExpenses
-            group={{ ...group, expenses: finalExpenses }}
-            member={selectedMember}
-          />
+        {/* 🔝 ACTION BUTTONS */}
+        <div className="group-topbar">
+          <button onClick={() => navigate("/")} title="Go back to home">
+            ⬅️ Back
+          </button>
+          <button onClick={handleRename} title="Rename this group">
+            ✏️ Rename
+          </button>
+          <button
+            className="danger-btn"
+            onClick={handleDelete}
+            title="Delete this group"
+          >
+            🗑️ Delete
+          </button>
+          <button
+            className="danger-btn"
+            onClick={handleReset}
+            title="Delete all data"
+          >
+            🔄 Reset All
+          </button>
         </div>
-      )}
+      </div>
+
+      {/* 📱 CONTENT AREA */}
+      <div className="group-content">
+        {/* ➕ ADD EXPENSE SECTION */}
+        <div className="section-card">
+          <ExpenseForm group={group} />
+        </div>
+
+        {/* 🔍 SEARCH & FILTER SECTION */}
+        {group.expenses.length > 0 && (
+          <div className="section-card filter-card">
+            <input
+              type="text"
+              className="filter-input"
+              placeholder="🔍 Search expenses..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+
+            <input
+              type="date"
+              className="filter-input"
+              value={jumpDate}
+              onChange={(e) => setJumpDate(e.target.value)}
+            />
+          </div>
+        )}
+
+        {/* 📋 EXPENSE LIST SECTION */}
+        {finalExpenses.length > 0 && (
+          <div className="section-card">
+            <ExpenseList expenses={finalExpenses} groupId={group.id} />
+          </div>
+        )}
+
+        {/* ⚖️ BALANCE SECTION */}
+        {finalExpenses.length > 0 && (
+          <div className="section-card">
+            <BalanceSummary group={{ ...group, expenses: finalExpenses }} />
+          </div>
+        )}
+
+        {/* 👥 MEMBER SUMMARY SECTION */}
+        {finalExpenses.length > 0 && (
+          <div className="section-card">
+            <MemberSummary
+              group={{ ...group, expenses: finalExpenses }}
+              setSelectedMember={setSelectedMember}
+            />
+          </div>
+        )}
+
+        {/* 👤 MEMBER EXPENSES SECTION */}
+        {selectedMember && finalExpenses.length > 0 && (
+          <div className="section-card">
+            <MemberExpenses
+              group={{ ...group, expenses: finalExpenses }}
+              member={selectedMember}
+            />
+          </div>
+        )}
+
+        {/* 🎯 EMPTY STATE */}
+        {group.expenses.length === 0 && (
+          <div className="section-card">
+            <div className="empty-state">
+              <div className="empty-state-icon">📝</div>
+              <h3 className="empty-state-title">No Expenses Yet</h3>
+              <p className="empty-state-text">
+                Add your first expense to get started!
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,65 +1,165 @@
-/* 📋 EXPENSE LIST CONTAINER */
+/* 📋 EXPENSE LIST - Splitwise Mobile */
+
 .expense-list {
-    margin-top: 24px;
+    margin-top: 20px;
 }
 
-/* TITLE */
+/* Title */
 .expense-list h3 {
-    font-size: 18px;
-    margin-bottom: 14px;
+    font-size: 1.125rem;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 0 4px;
 }
 
-/* 🧾 EXPENSE CARD */
+/* Expense item card */
 .expense-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 14px 16px;
     border-radius: 12px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
     margin-bottom: 10px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
 }
 
-/* LEFT INFO */
+.expense-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.expense-item:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Left info section */
 .expense-info {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    font-size: 14px;
-    color: #111;
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 0;
 }
 
-.expense-info small {
-    color: #6b7280;
-    font-size: 12px;
+.expense-info .title {
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* ❌ DELETE BUTTON */
+.expense-info .payer {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.expense-info .date {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+/* Right amount section */
+.expense-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    margin-left: 12px;
+}
+
+.expense-amount .amount {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.expense-amount small {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+/* Delete button */
 .delete-expense-btn {
     border: none;
-    background: #fee2e2;
-    color: #dc2626;
+    background: transparent;
+    color: var(--danger-color);
     cursor: pointer;
-    font-size: 14px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    transition: background 0.2s ease;
+    font-size: 1.25rem;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    margin-left: 10px;
+    flex-shrink: 0;
 }
 
 .delete-expense-btn:hover {
-    background: #fecaca;
+    background: rgba(255, 68, 88, 0.1);
 }
 
-/* 📱 MOBILE */
-@media (max-width: 768px) {
+.delete-expense-btn:active {
+    transform: scale(0.95);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+    .expense-list {
+        margin-top: 16px;
+    }
+
+    .expense-list h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
     .expense-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        padding: 12px 14px;
+        margin-bottom: 8px;
+    }
+
+    .expense-info {
+        gap: 3px;
+        font-size: 0.875rem;
+    }
+
+    .expense-info .title {
+        font-size: 0.9375rem;
+    }
+
+    .expense-info .payer {
+        font-size: 0.75rem;
+    }
+
+    .expense-amount {
+        margin-left: 10px;
+    }
+
+    .expense-amount .amount {
+        font-size: 0.9375rem;
     }
 
     .delete-expense-btn {
-        align-self: flex-end;
+        font-size: 1.125rem;
+        padding: 4px 6px;
+        margin-left: 8px;
+    }
+}
+
+/* Desktop optimizations */
+@media (min-width: 641px) {
+    .expense-list {
+        margin-top: 24px;
+    }
+
+    .expense-item {
+        padding: 16px;
+        margin-bottom: 12px;
     }
 }

@@ -1,58 +1,100 @@
-/* 👤 MEMBER EXPENSES CONTAINER */
+/* 👤 MEMBER EXPENSES - Splitwise Mobile */
+
 .member-expenses {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
-    padding: 20px;
-    margin-top: 24px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 20px 16px;
+    margin: 16px;
+    box-shadow: var(--shadow-md);
 }
 
-/* TITLE */
+/* Title */
 .member-expenses h3 {
-    font-size: 18px;
+    font-size: 1.125rem;
     margin-bottom: 14px;
     text-align: center;
+    color: var(--text-primary);
+    font-weight: 600;
 }
 
-/* 🧾 EACH EXPENSE */
+/* Individual member expense item */
 .member-expense-item {
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(248, 249, 250, 0.5) 100%);
+    border: 1px solid var(--border-light);
     border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 14px;
+    padding: 14px;
+    font-size: 0.875rem;
     margin-bottom: 10px;
+    transition: all 0.2s ease;
+}
+
+.member-expense-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
 }
 
 .member-expense-item strong {
     font-weight: 600;
-    color: #111;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 4px;
 }
 
 .member-expense-item small {
-    color: #6b7280;
-    font-size: 12px;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 4px;
 }
 
-/* EMPTY STATE */
+/* Empty state */
 .member-expense-empty {
     text-align: center;
-    color: #6b7280;
-    font-size: 14px;
-    margin-top: 12px;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    padding: 20px 0;
 }
 
-/* 📱 MOBILE */
-@media (max-width: 768px) {
+/* Mobile optimizations */
+@media (max-width: 640px) {
     .member-expenses {
         padding: 16px;
+        margin: 12px;
+        border-radius: 12px;
     }
 
     .member-expenses h3 {
-        font-size: 16px;
+        font-size: 1rem;
+        margin-bottom: 12px;
     }
 
     .member-expense-item {
-        font-size: 13px;
+        padding: 12px;
+        font-size: 0.8125rem;
+        margin-bottom: 8px;
+    }
+
+    .member-expense-item strong {
+        margin-bottom: 3px;
+    }
+
+    .member-expense-empty {
+        font-size: 0.875rem;
+        padding: 16px 0;
+    }
+}
+
+/* Desktop optimizations */
+@media (min-width: 641px) {
+    .member-expenses {
+        padding: 20px;
+        margin: 24px auto;
+        max-width: 600px;
+    }
+
+    .member-expense-item {
+        padding: 14px;
+        margin-bottom: 12px;
     }
 }
