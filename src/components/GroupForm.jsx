@@ -13,7 +13,7 @@ const GroupForm = () => {
 
   const handleCreateGroup = () => {
     if (!groupName || members.length < 2) {
-      alert("Group name aur at least 2 members chahiye");
+      alert("Group name and at least 2 members are required.");
       return;
     }
 
@@ -21,7 +21,7 @@ const GroupForm = () => {
       createGroup({
         name: groupName,
         members,
-      })
+      }),
     );
 
     navigate(`/group/${action.payload.id}`);

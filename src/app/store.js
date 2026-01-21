@@ -11,7 +11,6 @@ export const store = configureStore({
   preloadedState: persistedState,
 });
 
-// 🔥 Auto-save on every state change
 store.subscribe(() => {
   saveState({
     groups: store.getState().groups,

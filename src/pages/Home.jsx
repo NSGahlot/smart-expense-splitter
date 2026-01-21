@@ -13,7 +13,6 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
 
-  // 🔢 Quick Stats
   const totalGroups = groups.length;
   const totalExpenses = groups.reduce((acc, g) => acc + g.expenses.length, 0);
   const totalAmount = groups.reduce(
@@ -21,7 +20,6 @@ const Home = () => {
     0,
   );
 
-  // 🔍 Search Filter
   const filteredGroups = groups.filter((g) =>
     g.name.toLowerCase().includes(search.toLowerCase()),
   );
@@ -35,15 +33,12 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* 🎨 HEADER WITH TITLE */}
       <div className="home-header">
         <h1 className="home-title">Smart Expense Splitter</h1>
         <p className="home-subtitle">Split expenses with ease</p>
       </div>
 
-      {/* 📱 CONTENT AREA */}
       <div className="home-content">
-        {/* 📊 DASHBOARD STATS */}
         <div className="stats-wrapper">
           <div className="stat-card">
             <h3>Groups</h3>
@@ -61,7 +56,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* 🔍 SEARCH */}
         {groups.length > 0 && (
           <div className="search-section">
             <input
@@ -74,7 +68,6 @@ const Home = () => {
           </div>
         )}
 
-        {/* 📂 GROUP LIST SECTION */}
         {groups.length === 0 ? (
           <div className="empty-state">
             <div className="empty-state-icon">👥</div>
@@ -128,7 +121,6 @@ const Home = () => {
           </div>
         )}
 
-        {/* 🎯 ACTION BUTTONS */}
         <div className="home-actions">
           <button
             className="add-group-btn"
@@ -143,7 +135,6 @@ const Home = () => {
           )}
         </div>
 
-        {/* ➕ CREATE GROUP FORM */}
         {showForm && <GroupForm />}
       </div>
     </div>

@@ -36,7 +36,7 @@ const ExpenseForm = ({ group }) => {
           paidBy,
           splitType,
           customSplit: splitType === "custom" ? customSplit : null,
-          date: new Date(expenseDate).toISOString(), // ✅ USER SELECTED DATE
+          date: new Date(expenseDate).toISOString(),
         },
       }),
     );
@@ -75,7 +75,6 @@ const ExpenseForm = ({ group }) => {
         </select>
       </div>
 
-      {/* ✅ DATE PICKER */}
       <input
         type="date"
         value={expenseDate}

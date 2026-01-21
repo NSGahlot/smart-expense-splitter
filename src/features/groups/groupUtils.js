@@ -36,7 +36,6 @@ export function calculateBalances(group) {
   return balanceMap;
 }
 
-// Who owes whom
 export function simplifyBalances(balanceMap) {
   const creditors = [];
   const debtors = [];
@@ -62,7 +61,6 @@ export function simplifyBalances(balanceMap) {
   return result;
 }
 
-// 🔥 Member Summary
 export function calculateMemberSummary(group) {
   const summary = {};
   group.members.forEach((m) => {

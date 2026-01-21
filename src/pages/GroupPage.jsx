@@ -31,7 +31,6 @@ const GroupPage = () => {
 
   if (!group) return <p>Group not found</p>;
 
-  // 🔍 SEARCH FILTER
   const searchedExpenses = group.expenses.filter((e) => {
     const q = searchQuery.toLowerCase();
 
@@ -42,7 +41,6 @@ const GroupPage = () => {
     );
   });
 
-  // 📅 DATE FILTER
   const finalExpenses = jumpDate
     ? searchedExpenses.filter(
         (e) =>
@@ -64,21 +62,19 @@ const GroupPage = () => {
     }
   };
 
-  const handleReset = () => {
-    if (window.confirm("Delete all data? This cannot be undone.")) {
-      dispatch(resetAll());
-      localStorage.clear();
-      navigate("/");
-    }
-  };
+  // const handleReset = () => {
+  //   if (window.confirm("Delete all data? This cannot be undone.")) {
+  //     dispatch(resetAll());
+  //     localStorage.clear();
+  //     navigate("/");
+  //   }
+  // };
 
   return (
     <div className="group-container">
-      {/* 🎨 GROUP HEADER */}
       <div className="group-header">
         <h1 className="group-title">{group.name}</h1>
 
-        {/* 🔝 ACTION BUTTONS */}
         <div className="group-topbar">
           <button onClick={() => navigate("/")} title="Go back to home">
             ⬅️ Back
@@ -93,24 +89,21 @@ const GroupPage = () => {
           >
             🗑️ Delete
           </button>
-          <button
+          {/* <button
             className="danger-btn"
             onClick={handleReset}
             title="Delete all data"
           >
             🔄 Reset All
-          </button>
+          </button> */}
         </div>
       </div>
 
-      {/* 📱 CONTENT AREA */}
       <div className="group-content">
-        {/* ➕ ADD EXPENSE SECTION */}
         <div className="section-card">
           <ExpenseForm group={group} />
         </div>
 
-        {/* 🔍 SEARCH & FILTER SECTION */}
         {group.expenses.length > 0 && (
           <div className="section-card filter-card">
             <input
@@ -130,21 +123,18 @@ const GroupPage = () => {
           </div>
         )}
 
-        {/* 📋 EXPENSE LIST SECTION */}
         {finalExpenses.length > 0 && (
           <div className="section-card">
             <ExpenseList expenses={finalExpenses} groupId={group.id} />
           </div>
         )}
 
-        {/* ⚖️ BALANCE SECTION */}
         {finalExpenses.length > 0 && (
           <div className="section-card">
             <BalanceSummary group={{ ...group, expenses: finalExpenses }} />
           </div>
         )}
 
-        {/* 👥 MEMBER SUMMARY SECTION */}
         {finalExpenses.length > 0 && (
           <div className="section-card">
             <MemberSummary
@@ -154,7 +144,6 @@ const GroupPage = () => {
           </div>
         )}
 
-        {/* 👤 MEMBER EXPENSES SECTION */}
         {selectedMember && finalExpenses.length > 0 && (
           <div className="section-card">
             <MemberExpenses
@@ -164,7 +153,6 @@ const GroupPage = () => {
           </div>
         )}
 
-        {/* 🎯 EMPTY STATE */}
         {group.expenses.length === 0 && (
           <div className="section-card">
             <div className="empty-state">
