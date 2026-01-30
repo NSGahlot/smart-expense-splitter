@@ -18,6 +18,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     padding: 14px 16px;
     border-radius: 12px;
     background: var(--bg-primary);
@@ -37,15 +38,47 @@
     box-shadow: var(--shadow-sm);
 }
 
+/* Category Icon */
+.expense-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+}
+
 /* Left info section */
 .expense-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     font-size: 0.9375rem;
     color: var(--text-primary);
     flex: 1;
     min-width: 0;
+}
+
+.expense-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.expense-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.expense-meta small {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
 }
 
 .expense-info .title {

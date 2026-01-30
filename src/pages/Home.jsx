@@ -3,15 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import GroupForm from "../components/GroupForm";
 import { resetAll } from "../features/groups/groupsSlice";
+import { toggleTheme } from "../features/theme/themeSlice";
+import { addToast } from "../features/toast/toastSlice";
 import "./Home.css";
 
 const Home = () => {
   const groups = useSelector((state) => state.groups.groups);
+  const theme = useSelector((state) => state.theme.mode);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const totalGroups = groups.length;
   const totalExpenses = groups.reduce((acc, g) => acc + g.expenses.length, 0);
@@ -25,17 +29,47 @@ const Home = () => {
   );
 
   const handleReset = () => {
-    if (window.confirm("This will delete all groups and expenses. Continue?")) {
-      dispatch(resetAll());
-      localStorage.clear();
-    }
+    setShowConfirm(true);
+  };
+
+  const confirmReset = () => {
+    dispatch(resetAll());
+    localStorage.clear();
+    setShowConfirm(false);
+    dispatch(
+      addToast({
+        message: "All data has been reset",
+        type: "success",
+      }),
+    );
+  };
+
+  const handleThemeToggle = () => {
+    dispatch(toggleTheme());
+    dispatch(
+      addToast({
+        message: `Switched to ${theme === "light" ? "dark" : "light"} mode`,
+        type: "info",
+      }),
+    );
   };
 
   return (
     <div className="home-container">
       <div className="home-header">
-        <h1 className="home-title">Smart Expense Splitter</h1>
-        <p className="home-subtitle">Split expenses with ease</p>
+        <div className="header-content">
+          <div>
+            <h1 className="home-title">Smart Expense Splitter</h1>
+            <p className="home-subtitle">Split expenses with ease</p>
+          </div>
+          <button
+            className="theme-toggle"
+            onClick={handleThemeToggle}
+            title="Toggle theme"
+          >
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
+        </div>
       </div>
 
       <div className="home-content">
@@ -136,6 +170,28 @@ const Home = () => {
         </div>
 
         {showForm && <GroupForm />}
+
+        {showConfirm && (
+          <div className="confirm-overlay">
+            <div className="confirm-modal">
+              <h3>⚠️ Confirm Reset</h3>
+              <p>
+                This will delete all groups and expenses. This cannot be undone.
+              </p>
+              <div className="confirm-actions">
+                <button className="btn-danger" onClick={confirmReset}>
+                  Yes, Delete All
+                </button>
+                <button
+                  className="btn-secondary"
+                  onClick={() => setShowConfirm(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

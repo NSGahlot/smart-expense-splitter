@@ -8,11 +8,10 @@ import BalanceSummary from "../components/BalanceSummary";
 import MemberSummary from "../components/MemberSummary";
 import MemberExpenses from "../components/MemberExpenses";
 
-import {
-  resetAll,
-  renameGroup,
-  deleteGroup,
-} from "../features/groups/groupsSlice";
+import { renameGroup, deleteGroup } from "../features/groups/groupsSlice";
+import { toggleTheme } from "../features/theme/themeSlice";
+import { addToast } from "../features/toast/toastSlice";
+import { EXPENSE_CATEGORIES } from "../utils/categories";
 
 import "./GroupPage.css";
 
@@ -24,21 +23,27 @@ const GroupPage = () => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [jumpDate, setJumpDate] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const group = useSelector((state) =>
     state.groups.groups.find((g) => g.id === groupId),
   );
+  const theme = useSelector((state) => state.theme.mode);
 
   if (!group) return <p>Group not found</p>;
 
   const searchedExpenses = group.expenses.filter((e) => {
     const q = searchQuery.toLowerCase();
-
-    return (
+    const matchesSearch =
       e.title.toLowerCase().includes(q) ||
       e.paidBy.toLowerCase().includes(q) ||
-      (e.date && new Date(e.date).toDateString().toLowerCase().includes(q))
-    );
+      (e.date && new Date(e.date).toDateString().toLowerCase().includes(q));
+
+    const matchesCategory =
+      categoryFilter === "all" || e.category === categoryFilter;
+
+    return matchesSearch && matchesCategory;
   });
 
   const finalExpenses = jumpDate
@@ -50,30 +55,49 @@ const GroupPage = () => {
 
   const handleRename = () => {
     const newName = prompt("New group name", group.name);
-    if (newName) {
+    if (newName && newName !== group.name) {
       dispatch(renameGroup({ groupId: group.id, newName }));
+      dispatch(
+        addToast({
+          message: `Group renamed to "${newName}"`,
+          type: "success",
+        }),
+      );
     }
   };
 
   const handleDelete = () => {
-    if (window.confirm("Delete this group? This cannot be undone.")) {
-      dispatch(deleteGroup(group.id));
-      navigate("/");
-    }
+    setShowDeleteConfirm(true);
   };
 
-  // const handleReset = () => {
-  //   if (window.confirm("Delete all data? This cannot be undone.")) {
-  //     dispatch(resetAll());
-  //     localStorage.clear();
-  //     navigate("/");
-  //   }
-  // };
+  const confirmDelete = () => {
+    dispatch(deleteGroup(group.id));
+    dispatch(
+      addToast({
+        message: `Group "${group.name}" deleted`,
+        type: "info",
+      }),
+    );
+    navigate("/");
+  };
+
+  const handleThemeToggle = () => {
+    dispatch(toggleTheme());
+  };
 
   return (
     <div className="group-container">
       <div className="group-header">
-        <h1 className="group-title">{group.name}</h1>
+        <div className="header-top">
+          <h1 className="group-title">{group.name}</h1>
+          <button
+            className="theme-toggle"
+            onClick={handleThemeToggle}
+            title="Toggle theme"
+          >
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
+        </div>
 
         <div className="group-topbar">
           <button onClick={() => navigate("/")} title="Go back to home">
@@ -89,13 +113,6 @@ const GroupPage = () => {
           >
             🗑️ Delete
           </button>
-          {/* <button
-            className="danger-btn"
-            onClick={handleReset}
-            title="Delete all data"
-          >
-            🔄 Reset All
-          </button> */}
         </div>
       </div>
 
@@ -114,12 +131,27 @@ const GroupPage = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
 
-            <input
-              type="date"
-              className="filter-input"
-              value={jumpDate}
-              onChange={(e) => setJumpDate(e.target.value)}
-            />
+            <div className="filter-row">
+              <select
+                className="filter-input"
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+              >
+                <option value="all">All Categories</option>
+                {EXPENSE_CATEGORIES.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.icon} {cat.label}
+                  </option>
+                ))}
+              </select>
+
+              <input
+                type="date"
+                className="filter-input"
+                value={jumpDate}
+                onChange={(e) => setJumpDate(e.target.value)}
+              />
+            </div>
           </div>
         )}
 
@@ -165,6 +197,29 @@ const GroupPage = () => {
           </div>
         )}
       </div>
+
+      {showDeleteConfirm && (
+        <div className="confirm-overlay">
+          <div className="confirm-modal">
+            <h3>⚠️ Delete Group?</h3>
+            <p>
+              This will permanently delete the group "{group.name}" and all its
+              expenses. This action cannot be undone.
+            </p>
+            <div className="confirm-actions">
+              <button className="btn-danger" onClick={confirmDelete}>
+                Yes, Delete
+              </button>
+              <button
+                className="btn-secondary"
+                onClick={() => setShowDeleteConfirm(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

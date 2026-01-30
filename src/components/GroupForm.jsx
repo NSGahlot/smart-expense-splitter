@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createGroup } from "../features/groups/groupsSlice";
+import { addToast } from "../features/toast/toastSlice";
 import { useNavigate } from "react-router-dom";
 import MemberForm from "./MemberForm";
 import "./GroupForm.css";
@@ -13,7 +14,12 @@ const GroupForm = () => {
 
   const handleCreateGroup = () => {
     if (!groupName || members.length < 2) {
-      alert("Group name and at least 2 members are required.");
+      dispatch(
+        addToast({
+          message: "Group name and at least 2 members are required",
+          type: "warning",
+        }),
+      );
       return;
     }
 
@@ -21,6 +27,13 @@ const GroupForm = () => {
       createGroup({
         name: groupName,
         members,
+      }),
+    );
+
+    dispatch(
+      addToast({
+        message: `Group "${groupName}" created successfully!`,
+        type: "success",
       }),
     );
 

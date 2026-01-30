@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../features/groups/groupsSlice";
+import { addToast } from "../features/toast/toastSlice";
+import { EXPENSE_CATEGORIES } from "../utils/categories";
 import "./ExpenseForm.css";
 
 const ExpenseForm = ({ group }) => {
@@ -9,6 +11,7 @@ const ExpenseForm = ({ group }) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [paidBy, setPaidBy] = useState(group?.members?.[0] || "");
+  const [category, setCategory] = useState("other");
   const [splitType, setSplitType] = useState("equal");
   const [customSplit, setCustomSplit] = useState({});
   const [expenseDate, setExpenseDate] = useState(
@@ -25,7 +28,15 @@ const ExpenseForm = ({ group }) => {
   };
 
   const handleAddExpense = () => {
-    if (!title || !amount || !paidBy) return;
+    if (!title || !amount || !paidBy) {
+      dispatch(
+        addToast({
+          message: "Please fill in all required fields",
+          type: "error",
+        }),
+      );
+      return;
+    }
 
     dispatch(
       addExpense({
@@ -34,6 +45,7 @@ const ExpenseForm = ({ group }) => {
           title,
           amount: Number(amount),
           paidBy,
+          category,
           splitType,
           customSplit: splitType === "custom" ? customSplit : null,
           date: new Date(expenseDate).toISOString(),
@@ -41,10 +53,18 @@ const ExpenseForm = ({ group }) => {
       }),
     );
 
+    dispatch(
+      addToast({
+        message: "Expense added successfully!",
+        type: "success",
+      }),
+    );
+
     setTitle("");
     setAmount("");
     setSplitType("equal");
     setCustomSplit({});
+    setCategory("other");
     setExpenseDate(new Date().toISOString().split("T")[0]);
   };
 
@@ -75,11 +95,21 @@ const ExpenseForm = ({ group }) => {
         </select>
       </div>
 
-      <input
-        type="date"
-        value={expenseDate}
-        onChange={(e) => setExpenseDate(e.target.value)}
-      />
+      <div className="expense-row">
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          {EXPENSE_CATEGORIES.map((cat) => (
+            <option key={cat.id} value={cat.id}>
+              {cat.icon} {cat.label}
+            </option>
+          ))}
+        </select>
+
+        <input
+          type="date"
+          value={expenseDate}
+          onChange={(e) => setExpenseDate(e.target.value)}
+        />
+      </div>
 
       <div className="split-options">
         <label>

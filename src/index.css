@@ -1,6 +1,6 @@
 /* 🎨 SPLITWISE MOBILE THEME - Base Styling */
 
-/* Color Palette */
+/* Color Palette - Light & Dark Mode */
 :root {
   --primary-color: #0066cc;
   --primary-light: #e8f1ff;
@@ -23,6 +23,22 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark Mode Colors */
+[data-theme="dark"] {
+  --text-primary: #e8e8e8;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #808080;
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #242424;
+  --bg-tertiary: #2e2e2e;
+  --border-color: #3a3a3a;
+  --border-light: #2e2e2e;
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
 * {
